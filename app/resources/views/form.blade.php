@@ -43,7 +43,7 @@
 
                     <label for="fname">URL du site</label><br>
                     <input type="text" id="url" name="url" class="@error('url') is-invalid @enderror"><br>
-                    <input type="text" id="mail" name="mail"><br>
+                    <input type="text" id="login" name="login"><br>
                     <input type="text" id="mdp" name="mdp"><br><br>
                     <input type="submit" value="Submit">
                     @if ($errors->any())

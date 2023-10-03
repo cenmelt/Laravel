@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use App\Models\Password;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 
  
 class PwdController extends Controller
@@ -14,27 +17,37 @@ class PwdController extends Controller
     {
         $rules = [
             'url' => 'required|string|url',
-            'mail' => 'required|string|email',
+            'login' => 'required|string',
             'mdp' => 'required|string',
         ];
         
         $validator = Validator::make($request->all(), $rules);
 
         if ($validator->fails()) {
-            return redirect('/gestionMdp')->withErrors($validator);
+            return redirect('/password')->withErrors($validator);
         }
 
         // Save the data to the database
         $url = $_POST['url'];
-        $email = $_POST['mail'];
-        $mdp = $_POST["mdp"];
-        $data = array('URL' => $url,'EMAIL' => $email,'MDP' => $mdp);
+        $login = $_POST['login'];
+        $mdp = Crypt::encryptString($_POST["mdp"]);
+        $data = array('URL' => $url,'Login' => $login,'MDP' => $mdp);
         $json = json_encode($data);
         Storage::put(time().'.json', $json);
 
+        $user_id = Auth::user()->id;
+
+        $pwd = new Password;
+        $pwd->user_id = $user_id;
+        $pwd->site = $url;
+        $pwd->login = $login;
+        $pwd->password = $mdp;
+        $pwd->save();
+
+
         // return redirect("/welcome")->withErrors($validator);
         // return redirect('welcome')->route('welcome');
-        return redirect('/');
+        return redirect('/password');
     }
 }
  

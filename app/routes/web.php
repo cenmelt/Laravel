@@ -35,6 +35,10 @@ Route::get('/form', function () {
     return view('form');
 });
 
+Route::get('/password', function () {
+    return view('password');
+});
+
 Route::post('/PwdController', [
     PwdController::class, 'form'
 ])->name('PwdController');
