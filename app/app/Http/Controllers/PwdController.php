@@ -10,6 +10,7 @@ use App\Models\Password;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 
+
  
 class PwdController extends Controller
 {
@@ -33,7 +34,7 @@ class PwdController extends Controller
         $mdp = Crypt::encryptString($_POST["mdp"]);
         $data = array('URL' => $url,'Login' => $login,'MDP' => $mdp);
         $json = json_encode($data);
-        Storage::put(time().'.json', $json);
+        Storage::put(time().'.json', $json); 
 
         $user_id = Auth::user()->id;
 
@@ -47,6 +48,25 @@ class PwdController extends Controller
 
         // return redirect("/welcome")->withErrors($validator);
         // return redirect('welcome')->route('welcome');
+        return redirect('/password');
+    }
+
+    public function id(int $idpass){
+        return view('change', ['idpass'=>$idpass]);
+    }
+
+    public function editPwd(Request $request, $idpass){
+        $rules = [
+            'mdp' => 'required|string',
+        ];
+        
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails()) {
+            return redirect('/password')->withErrors($validator);
+        }
+        $mdp = $_POST["password"];
+        $idpass->update(['password'=>$mdp]);    
         return redirect('/password');
     }
 }

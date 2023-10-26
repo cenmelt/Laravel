@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ListingController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PwdController;
@@ -42,3 +43,19 @@ Route::get('/password', function () {
 Route::post('/PwdController', [
     PwdController::class, 'form'
 ])->name('PwdController');
+
+Route::get('/password', [
+    ListingController::class, 'getInfo'
+])->name('ListingController');
+
+Route::get('/change/{idpass}', function () {
+    return view('change');
+});
+Route::get('/change/{idpass}', [
+    PwdController::class, 'id'
+])->name('id');
+
+
+Route::post('/change/{idpass}', [
+    PwdController::class, 'editPwd'
+])->name('editPwd');

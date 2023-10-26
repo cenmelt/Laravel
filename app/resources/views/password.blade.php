@@ -36,11 +36,15 @@
                 </div>
             @endif
         </div>
-        <section>
-            <h1>Page de mdp</h1>
-            <table class="tftable border=1">
-                <tr><th>site : </th><th>Login :</th><th>mdp :</th></tr>
-            </table>
-        </section>
+        @auth
+            <section>
+                <h1>Page de mdp</h1>
+                <table class="tftable border=1">
+                    @foreach($info as $user)
+                        <tr><th>site : {{ $user->site }}</th><th>Login : {{ $user->login }}</th><th>mdp : <a href="{{route('id',$user->id)}}">{{ $user->password }}</a></th></tr>
+                    @endforeach
+                </table>
+            </section>
+        @endauth
     </body>
 </html>

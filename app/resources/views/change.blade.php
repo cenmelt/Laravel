@@ -37,12 +37,10 @@
                 </div>
 
             <div class="mt-16">
-                <form action="{{route('PwdController')}}" method="POST">
+                <form action="{{route('editPwd', $idpass)}}" method="POST">
                 @csrf
-                    <label for="fname">URL du site</label><br>
-                    <input type="text" id="url" name="url" class="@error('url') is-invalid @enderror"><br>
-                    <input type="text" id="login" name="login"><br>
-                    <input type="text" id="mdp" name="mdp"><br><br>
+                    <label for="fname">Changez de mot de passe :</label><br>
+                    <input type="text" id="password" name="password" class="@error('mdp') is-invalid @enderror"><br>
                     <input type="submit" value="Submit">
                     @if ($errors->any())
 
