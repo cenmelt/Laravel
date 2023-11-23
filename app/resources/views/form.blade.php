@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -40,11 +39,11 @@
             <div class="mt-16">
                 <form action="{{route('PwdController')}}" method="POST">
                 @csrf
-                @method("POST")
-
                     <label for="fname">URL du site</label><br>
                     <input type="text" id="url" name="url" class="@error('url') is-invalid @enderror"><br>
-                    <input type="text" id="mail" name="mail"><br>
+                    <label for="fname">login</label><br>
+                    <input type="text" id="login" name="login"><br>
+                    <label for="fname">mdp</label><br>
                     <input type="text" id="mdp" name="mdp"><br><br>
                     <input type="submit" value="Submit">
                     @if ($errors->any())
