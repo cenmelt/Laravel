@@ -4,18 +4,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Team;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
-class teamsController extends Controller
+class joinTeamController extends Controller
 {
-    public function team(Request $request)
+    public function joinTeam(Request $request)
     {
         $rules = [
-            'teams' => 'required|string|unique:teams,name',
+            'name' => 'required|string',
         ];
         
         $validator = Validator::make($request->all(), $rules);
@@ -37,5 +36,4 @@ class teamsController extends Controller
 
         return redirect('/password');
     }
-
 }

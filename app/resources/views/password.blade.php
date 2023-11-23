@@ -40,10 +40,23 @@
             <section>
                 <h1>Page de mdp</h1>
                 <table class="tftable border=1">
-                    @foreach($info as $user)
+                    @foreach($info_pass as $user)
                         <tr><th>site : {{ $user->site }}</th><th>Login : {{ $user->login }}</th><th>mdp : <a href="{{route('id',$user->id)}}">{{ $user->password }}</a></th></tr>
                     @endforeach
                 </table>
+            </section>
+            <section>
+                <h1>Page de mes teams</h1>
+                <table class="tftable border=1">
+                    @foreach($info_teams as $team)
+                        <tr><th>name: {{ $team->name }}</th></tr>
+                    @endforeach
+                </table>
+            </section>
+            <section>
+                <label for="fname">Recherche de team</label><br>
+                <input type="text" id="search" name="search"><br><br>
+                <input type="submit" value="Rechercher">
             </section>
         @endauth
     </body>

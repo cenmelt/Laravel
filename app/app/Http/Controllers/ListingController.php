@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Password;
+use App\Models\User;
+use App\Models\Team;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 
@@ -15,12 +17,13 @@ class ListingController extends Controller
 {
     public function getInfo(Request $request){
         $user_id = Auth::user()->id;
-        $info = Password::where('user_id', $user_id)->get();
+        $user = User::find($user_id);
+        $info_pass = Password::where('user_id', $user_id)->get();
         // mdp ou id du user en ligne = un id ds la table -> recuperer
-        foreach($info as $key => $val){
-            $info[$key]->password = Crypt::decryptString($info[$key]->password);
+        foreach($info_pass as $key => $val){
+            $info_pass[$key]->password = Crypt::decryptString($info_pass[$key]->password);
         }
-        return view('password', ["info"=>$info]);
+        return view('password', ["info_pass"=>$info_pass], ["info_teams"=>$user->teams]);
     }
 }
  
