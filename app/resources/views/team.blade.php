@@ -37,14 +37,10 @@
                 </div>
 
             <div class="mt-16">
-                <form action="{{route('PwdController')}}" method="POST">
+                <form action="{{route('teamsController')}}" method="POST">
                 @csrf
-                    <label for="fname">URL du site</label><br>
-                    <input type="text" id="url" name="url" class="@error('url') is-invalid @enderror"><br>
-                    <label for="fname">login</label><br>
-                    <input type="text" id="login" name="login"><br>
-                    <label for="fname">mdp</label><br>
-                    <input type="text" id="mdp" name="mdp"><br><br>
+                    <label for="fname">Nom de l'equipe</label><br>
+                    <input type="text" id="teams" name="teams" class="@error('teams') is-invalid @enderror"><br>
                     <input type="submit" value="Submit">
                     @if ($errors->any())
 

@@ -4,6 +4,8 @@ use App\Http\Controllers\ListingController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PwdController;
+use App\Http\Controllers\teamsController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -36,6 +38,10 @@ Route::get('/form', function () {
     return view('form');
 });
 
+Route::get('/team', function () {
+    return view('team');
+});
+
 Route::get('/password', function () {
     return view('password');
 });
@@ -43,6 +49,10 @@ Route::get('/password', function () {
 Route::post('/PwdController', [
     PwdController::class, 'form'
 ])->name('PwdController');
+
+Route::post('/teamsController', [
+    teamsController::class, 'team'
+])->name('teamsController');
 
 Route::get('/password', [
     ListingController::class, 'getInfo'
@@ -54,7 +64,6 @@ Route::get('/change/{idpass}', function () {
 Route::get('/change/{idpass}', [
     PwdController::class, 'id'
 ])->name('id');
-
 
 Route::post('/change/{idpass}', [
     PwdController::class, 'editPwd'

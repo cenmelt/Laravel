@@ -29,9 +29,9 @@ class PwdController extends Controller
         }
 
         // Save the data to the database
-        $url = $_POST['url'];
-        $login = $_POST['login'];
-        $mdp = Crypt::encryptString($_POST["mdp"]);
+        $url = $request['url'];
+        $login = $request['login'];
+        $mdp = Crypt::encryptString($request['mdp']);
         $data = array('URL' => $url,'Login' => $login,'MDP' => $mdp);
         $json = json_encode($data);
         Storage::put(time().'.json', $json); 
@@ -55,18 +55,17 @@ class PwdController extends Controller
         return view('change', ['idpass'=>$idpass]);
     }
 
-    public function editPwd(Request $request, $idpass){
+    public function editPwd(Request $request, Password $idpass){
         $rules = [
-            'mdp' => 'required|string',
+            'password' => 'required|string',
         ];
-        
         $validator = Validator::make($request->all(), $rules);
 
         if ($validator->fails()) {
             return redirect('/password')->withErrors($validator);
         }
-        $mdp = $_POST["password"];
-        $idpass->update(['password'=>$mdp]);    
+        $mdp = Crypt::encryptString($request['password']);
+        $idpass->update(['password'=>$mdp]);
         return redirect('/password');
     }
 }
