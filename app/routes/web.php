@@ -5,6 +5,9 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PwdController;
 use App\Http\Controllers\teamsController;
+use App\Http\Controllers\joinTeamController;
+use App\Http\Controllers\Controller;
+
 
 
 /*
@@ -18,13 +21,9 @@ use App\Http\Controllers\teamsController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/', [
+    Controller::class, 'welcome'
+])->name('/');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -34,17 +33,13 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
-Route::get('/form', function () {
-    return view('form');
-});
+Route::get('/form',[
+    Controller::class, 'forme'
+])->name('Controller');
 
-Route::get('/team', function () {
-    return view('team');
-});
-
-Route::get('/password', function () {
-    return view('password');
-});
+Route::get('/team', [
+    Controller::class, 'team'
+])->name('Controller');
 
 Route::post('/PwdController', [
     PwdController::class, 'form'
@@ -53,6 +48,10 @@ Route::post('/PwdController', [
 Route::post('/teamsController', [
     teamsController::class, 'team'
 ])->name('teamsController');
+
+Route::post('/joinTeamController', [
+    joinTeamController::class, 'joinTeam'
+])->name('joinTeamController');
 
 Route::get('/password', [
     ListingController::class, 'getInfo'

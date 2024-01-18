@@ -10,4 +10,16 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, ValidatesRequests;
 
+    public function welcome(){
+        return view('welcome');
+    }
+
+    public function forme(){
+        return view('form');
+    }
+
+    public function team(){
+        return view('team');
+    }
 }
+
