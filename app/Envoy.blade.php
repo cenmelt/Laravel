@@ -5,6 +5,7 @@
     git checkout production
     cd app
     composer update
-    php artisan migrate
+    php artisan migrate --force
     composer install --optimize-autoloader --no-dev
+    php artisan key:generate
 @endtask
