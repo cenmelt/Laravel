@@ -37,9 +37,9 @@ Route::get('/form',[
     Controller::class, 'forme'
 ])->name('Controller');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard',[
+    Controller::class, 'dashboard'
+])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/team', [
     Controller::class, 'teamView'
@@ -61,9 +61,6 @@ Route::get('/password', [
     ListingController::class, 'getInfo'
 ])->name('ListingController');
 
-Route::get('/change/{idpass}', function () {
-    return view('change');
-});
 Route::get('/change/{idpass}', [
     PwdController::class, 'id'
 ])->name('id');

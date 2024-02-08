@@ -21,5 +21,8 @@ class Controller extends BaseController
     public function teamView(){
         return view('team');
     }
+    public function dashboard(){
+        return view('dashboard');
+    }
 }
 
