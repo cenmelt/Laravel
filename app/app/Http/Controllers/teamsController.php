@@ -23,8 +23,6 @@ class teamsController extends Controller
         if ($validator->fails()) {
             return redirect('/password')->withErrors($validator);
         }
-
-        // Save the data to the database
         $team = $request['teams'];
         $user_id = Auth::user()->id;
 

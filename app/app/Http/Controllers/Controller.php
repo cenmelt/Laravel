@@ -18,7 +18,7 @@ class Controller extends BaseController
         return view('form');
     }
 
-    public function team(){
+    public function teamView(){
         return view('team');
     }
 }

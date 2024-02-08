@@ -19,7 +19,6 @@ class ListingController extends Controller
         $user_id = Auth::user()->id;
         $user = User::find($user_id);
         $info_pass = Password::where('user_id', $user_id)->get();
-        // mdp ou id du user en ligne = un id ds la table -> recuperer
         foreach($info_pass as $key => $val){
             $info_pass[$key]->password = Crypt::decryptString($info_pass[$key]->password);
         }

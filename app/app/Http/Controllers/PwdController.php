@@ -44,10 +44,6 @@ class PwdController extends Controller
         $pwd->login = $login;
         $pwd->password = $mdp;
         $pwd->save();
-
-
-        // return redirect("/welcome")->withErrors($validator);
-        // return redirect('welcome')->route('welcome');
         return redirect('/password');
     }
 

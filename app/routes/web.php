@@ -37,8 +37,12 @@ Route::get('/form',[
     Controller::class, 'forme'
 ])->name('Controller');
 
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
 Route::get('/team', [
-    Controller::class, 'team'
+    Controller::class, 'teamView'
 ])->name('Controller');
 
 Route::post('/PwdController', [
