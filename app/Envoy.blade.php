@@ -5,7 +5,11 @@
     git checkout production
     cd app
     composer update
+    npm install
+    npm run build
     php artisan migrate --force
     composer install --optimize-autoloader --no-dev
+    php artisan optimize:clear
+    php artisan optimize
     php artisan key:generate
 @endtask
